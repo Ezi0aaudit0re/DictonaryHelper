@@ -1,6 +1,7 @@
 __author__ = "Aman Nagpal"
 __email__ = "amannagpal4@gmail.com"
 
+from operator import itemgetter
 
 class DictionarySorting:
     def convertToList(self, dict={}):
@@ -23,7 +24,6 @@ class DictionarySorting:
         dict = {}
         for a, b in list:
             dict[a] = b
-
         return dict
 
     def sorting(self, dict={}):
@@ -35,6 +35,19 @@ class DictionarySorting:
         list = self.convertToList(dict)
         list = sorted(list, key = lambda t:t[1])
         return self.convertToDictionary(list)
+
+
+    def sortingList(self,list = [],param1 = None,param2 = None,method='asc'):
+        """
+        This function takes in a list of dictionary and sorts it in asseding order
+        :param list: dictionary to sort
+        :param param1: parameter to sort it by
+        :param param2: second parameter to sort it by
+        :param method: desc to sort in descending order
+        :return: a sorted dictionary
+        """
+        params = itemgetter(param1) if param2 == None else itemgetter(param1, param2)
+        return sorted(list, key=params, reverse=False if method == 'asc' else True)
 
     def max(self, dict={}, orderBy="value"):
         """
@@ -74,5 +87,5 @@ class DictionarySorting:
         else:
             pass
 
-
-dict = DictionarySorting().min({"aman": 23, "Tom": 35}, "value")
+# dict = DictionarySorting().sortingList(stocks, "price", "name")
+# print(dict)
